@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
 const api = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://kbz-code-test-kklo-api.herokuapp.com",
 });
 
 api.interceptors.request.use((request: InternalAxiosRequestConfig<any>) => {
