@@ -1,0 +1,46 @@
+.contact-bg {
+    background-color: #06458D;
+    color: white;
+}
+
+.btn-text {
+    color: #063A78;
+    font-weight: 600;
+}
+
+.hero-bg {
+    background-color: #015EB9;
+    color: white;
+}
+
+.welcome-bg {
+    background: linear-gradient(90deg, #E1F3FA 0%, rgba(225, 243, 250, 0.15) 98.83%);
+}
+
+.service-bg {
+    background-color: #F2FBFF;
+}
+
+.country-one {
+    background-color: #FFF4E3;
+}
+
+.country-two {
+    background-color: #F2FBFF;
+}
+
+.country-three {
+    background-color: #FCEBFF;
+}
+
+.country-four {
+    background-color: #E1F6EF;
+}
+
+.kbz-text-color {
+    color: #015EB9;
+}
+
+.preview-tag-bg {
+    background-color: #015EB9;
+}
