@@ -9,9 +9,8 @@ api.interceptors.request.use((request: InternalAxiosRequestConfig<any>) => {
 
     const jwtToken = localStorage.getItem('accessToken');
 
-    if (jwtToken) {
-        request.headers.set('Authorization', 'Bearer ' + jwtToken);
-    }
+    if (jwtToken) request.headers.set('Authorization', 'Bearer ' + jwtToken);
+
     return request;
 });
 
