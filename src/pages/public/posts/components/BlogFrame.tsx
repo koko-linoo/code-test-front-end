@@ -3,12 +3,14 @@ import CategorySideBar from '../categories';
 import TagSideBar from '../tags';
 import RecentSideBar from '../recent';
 import { SearchField } from '@components/commons/search';
+import { useParams } from 'react-router-dom';
 
 interface BlogFrameProps {
     children: React.ReactNode;
 }
 
 export default function BlogFrame({ children }: BlogFrameProps) {
+    const param = useParams()
     return (
         <section >
             <div
@@ -19,7 +21,7 @@ export default function BlogFrame({ children }: BlogFrameProps) {
                 <span className='text-sm'><span className='text-slate-400'>Home</span> &gt; Blog</span>
             </div>
             <div className='h-28 text-2xl bg-white text-bold flex items-center justify-center'>
-                Latest News
+                {param.id ? "" : "Latest News"}
             </div>
             <section className='px-10 lg:px-24 xl:px-64 mb-5 flex flex-col flex-col-reverse lg:flex-row lg:space-x-10'>
                 <div className='basis-2/3'>
