@@ -46,7 +46,7 @@ export default function FootPrintSection() {
             <span className="text-center text-xs font-normal md:w-2/3 leading-5">
                 Clients include Banks, Non-Banking Financial Institutions, Non-Financial Institutions, Insurance Companies, Broker Dealers, Payment Processors, Check Cashers, Digital Payments Companies, Money Transmitters, and Crypto Currency Solution Companies including Exchanges and Market Places.
             </span>
-            <div className="w-full grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-4">
+            <div className="w-full grid gap-4 md:gap-8 grid-cols-1 sm:grid-cols-2 sm:gap-4 md:grid-cols-4">
                 {footPrints.map((footPrint) => (
                     <div key={footPrint.title}>
                         <div className='shadow rounded'>

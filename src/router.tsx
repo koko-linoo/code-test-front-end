@@ -5,6 +5,7 @@ import HomePage from './pages/public/home'
 import PostsPage from './pages/public/posts'
 import CategoriesPage from './pages/public/categories'
 import TagsPage from './pages/public/tags'
+import PostDetail from '@pages/public/posts/detail'
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
             {
                 path: 'blogs',
                 element: <PostsPage />
+            },
+            {
+                path: 'blogs/:id',
+                element: <PostDetail />
             },
             {
                 path: 'categories',

@@ -7,28 +7,34 @@ import 'react-slideshow-image/dist/styles.css';
 import { CategoryModel } from "@services/categoryService";
 import { useGetCategorys } from "@hooks/category";
 import { useState } from "react";
+import CustomButton from "@components/commons/button";
+import { useNavigate } from "react-router-dom";
 
 export default function PostSection() {
     const [index, setIndex] = useState(0);
+    const navigate = useNavigate();
     const { isLoading, data = [] } = useGetCategorys();
 
     return (
-        <section className="px-10 lg:px-24 xl:px-64 py-20 relative  overflow-hidden">
+        <section className="px-10 lg:px-24 xl:px-64 py-10 relative">
             {isLoading ? <Loading /> :
                 <>
-                    <div className="absolute bottom-0 top-0 left-44 flex items-center">
+                    <div className="absolute bottom-0 top-0 left-5 xl:left-44 flex items-center">
                         <button onClick={() => setIndex(prev => prev != 0 ? prev - 1 : prev)} className="p-3 bg-blue-200 rounded-lg">
                             <img className="w-2 h-2" src={leftImage} />
                         </button>
                     </div>
-                    {(data.length !== 0) && <CategorizedPosts category={data[index]} />}
-                    <div className="absolute bottom-0 top-0 right-44 flex items-center">
+                    {data.length !== 0 && <CategorizedPosts category={data[index]} />}
+                    <div className="absolute bottom-0 top-0 right-5 xl:right-44 flex items-center">
                         <button onClick={() => setIndex(prev => prev !== data.length - 1 ? prev + 1 : prev)} className="p-3 bg-blue-200 rounded-lg">
                             <img className="w-2 h-2 rotate-180" src={leftImage} />
                         </button>
                     </div>
                 </>
             }
+            <div className="w-full flex mt-10 justify-center">
+                <CustomButton onClick={() => navigate('/blogs')} label="Load More" type="red" />
+            </div>
         </section>
     )
 }
@@ -39,6 +45,7 @@ interface CategorizedPostsProps {
 
 export function CategorizedPosts({ category }: CategorizedPostsProps) {
 
+    const navigate = useNavigate();
     const { isLoading, data } = useGetPosts({
         skip: 0,
         take: 3,
@@ -53,7 +60,7 @@ export function CategorizedPosts({ category }: CategorizedPostsProps) {
     return (
         <div className="flex text-xl font-bold flex-col items-center space-y-5">
             <span>{category.name}</span>
-            {isLoading ? <Loading /> : <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 md:gap-8'>
+            {isLoading ? <Loading /> : data && data.response.list.length !== 0 ? <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3 md:gap-8'>
                 {data?.response.list.map((item, index) => {
                     const date = new Date(item.createdAt);
                     return (
@@ -73,7 +80,7 @@ export function CategorizedPosts({ category }: CategorizedPostsProps) {
                                 <div className="text-xs font-extralight leading-6">
                                     {item.content}
                                 </div>
-                                <button className="active:bg active:bg-sky-300 text-xs rounded-full hover:shadow-lg hover:bg-sky-200 hover:shadow-blue-200/50 px-4 py-2 space-x-2 flex items-center">
+                                <button onClick={() => navigate(`blogs/${item.id}`)} className="active:bg active:bg-sky-300 text-xs rounded-full hover:shadow-lg hover:bg-sky-200 hover:shadow-blue-200/50 px-4 py-2 space-x-2 flex items-center">
                                     <span className='text-sky-900'>Read More</span>
                                     <img className='w-4' src={blueArrowImage} />
                                 </button>
@@ -81,7 +88,7 @@ export function CategorizedPosts({ category }: CategorizedPostsProps) {
                         </div>
                     )
                 })}
-            </div>}
+            </div> : <div className="font-bold text-md">No Post Yet</div>}
         </div>
     )
 }

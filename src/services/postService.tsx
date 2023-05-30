@@ -6,7 +6,7 @@ export interface PostModel {
     user: {
         username: string;
     };
-
+    categoryId: number;
     content: string;
     benefit: string;
     imageUrl: string;
@@ -29,8 +29,9 @@ export async function fetchAllPosts(params?: any): Promise<PaginatedResult<PostM
     return result.data;
 }
 
-export function fetchPost(id: number) {
-    return api.get(`${endpoint}/${id}`);
+export async function fetchPost(id: number): Promise<PostModel> {
+    const result = await api.get(`${endpoint}/${id}`);
+    return result.data;
 }
 
 export function addPost(data: any): any {
