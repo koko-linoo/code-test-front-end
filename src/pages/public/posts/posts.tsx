@@ -38,9 +38,9 @@ export function PostsContent() {
 
     return (
         <div className="basis-2/3 flex flex-col items-center justify-center h-full">
-            {category ? <span className='my-5 border w-full p-3 shadow bg-white'>Category - {category.name}</span> : null}
-            {isLoading ? <Loading /> :
-                (data && data?.response.list.length == 0) ? <div className='h-36 flex items-center justify-center'>No Record</div> : <>
+            {category ? <span className='my-5 md:my-0 md:mb-5 border w-full p-3 shadow bg-white'>Category - {category.name}</span> : null}
+            {isLoading ? <div className='h-full py-5'><Loading /></div> :
+                (data && data?.response.list.length == 0) ? <div className='flex-1 py-36 w-full flex items-center justify-center'>No Record</div> : <>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8'>
                         {data?.response.list.map((item, index) => {
                             return (
