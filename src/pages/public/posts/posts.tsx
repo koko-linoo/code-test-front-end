@@ -8,6 +8,8 @@ export function PostsContent() {
 
     const [params, setSearchParam] = useSearchParams();
 
+    let category = params.get('category') ? { name: params.get('category') } : undefined;
+
     const { isLoading, data } = useGetPosts({
         skip: 0,
         take: parseInt(params.get('page') ?? '1') * 6,
@@ -15,7 +17,7 @@ export function PostsContent() {
             title: params.get('title') ? {
                 contains: params.get('title'),
             } : undefined,
-            category: params.get('category') ? { name: params.get('category') } : undefined,
+            category,
         }),
         orderBy: JSON.stringify({
             id: 'desc'
@@ -36,8 +38,9 @@ export function PostsContent() {
 
     return (
         <div className="basis-2/3 flex flex-col items-center justify-center h-full">
+            {category ? <span className='my-5 border w-full p-3 shadow bg-white'>Category - {category.name}</span> : null}
             {isLoading ? <Loading /> :
-                (data && data?.response.list.length == 0) ? <div>No Record</div> : <>
+                (data && data?.response.list.length == 0) ? <div className='h-36 flex items-center justify-center'>No Record</div> : <>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8'>
                         {data?.response.list.map((item, index) => {
                             return (
