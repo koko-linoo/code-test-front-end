@@ -38,7 +38,7 @@ export function PostsContent() {
         <div className="basis-2/3 flex flex-col items-center justify-center h-full">
             {isLoading ? <Loading /> :
                 (data && data?.response.list.length == 0) ? <div>No Record</div> : <>
-                    <div className='grid grid-cols-1 md:grid-cols-2 md:gap-8'>
+                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8'>
                         {data?.response.list.map((item, index) => {
                             return (
                                 <PostGridItem key={index} item={item} />

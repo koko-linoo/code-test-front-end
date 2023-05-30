@@ -1,18 +1,20 @@
 import Loading from "@components/commons/loading";
 import { useGetCategorys } from "@hooks/category"
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function CategorySideBar() {
 
     const { isLoading, data } = useGetCategorys();
 
-    const [search, setSearchParam] = useSearchParams();
+    const navigate = useNavigate();
 
-    const onClick = (name?: string) => setSearchParam(prev => {
-        let current = prev.get('page') ?? '1';
-        let category = prev.get('category');
+    const [searchParams] = useSearchParams();
 
-        let title = prev.get('title');
+    const onClick = (name?: string) => {
+        let current = searchParams.get('page') ?? '1';
+        let category = searchParams.get('category');
+
+        let title = searchParams.get('title');
 
         let search = "page=" + current;
 
@@ -20,8 +22,8 @@ export default function CategorySideBar() {
 
         if (name && category !== name) search += "&category=" + name;
 
-        return search;
-    })
+        navigate("/blogs?" + search);
+    }
 
     const active = "flex justify-between bg-blue-200 shadow hover:cursor-pointer shadow-blue-200 p-2";
     const unactive = "flex justify-between hover:bg-blue-50 hover:cursor-pointer hover:shadow hover:shadow-blue-50 p-2";
@@ -36,7 +38,7 @@ export default function CategorySideBar() {
                             return (
                                 <div
                                     onClick={() => onClick(cat.name)} key={`${cat.name} ${index}`}
-                                    className={`${search.get('category') === cat.name ? active : unactive}`}
+                                    className={`${searchParams.get('category') === cat.name ? active : unactive}`}
                                 >
                                     <span className="font-extralight text-xs">
                                         {cat.name}

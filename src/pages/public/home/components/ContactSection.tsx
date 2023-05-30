@@ -5,7 +5,7 @@ export default function ContactSection() {
                 Subscribe Newslatter & get
                 KB7 Money Alerts
             </span>
-            <div className="space-x-5 md:space-y-0 space-y-5">
+            <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-5 md:space-y-0 space-y-5">
                 <input
                     className="px-3 w-64 text-white font-normal py-2 text-xs bg-transparent border rounded-md"
                     type="text"
