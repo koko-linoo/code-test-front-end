@@ -11,6 +11,12 @@ export function PostsContent() {
     const { isLoading, data } = useGetPosts({
         skip: 0,
         take: parseInt(params.get('page') ?? '1') * 6,
+        filter: JSON.stringify({
+            title: params.get('title') ? {
+                contains: params.get('title'),
+            } : undefined,
+            category: params.get('category') ? { name: params.get('category') } : undefined,
+        }),
         orderBy: JSON.stringify({
             id: 'desc'
         })
@@ -18,13 +24,20 @@ export function PostsContent() {
 
     const onClick = () => setSearchParam(prev => {
         let current = parseInt(prev.get('page') ?? '1') + 1
-        return "page=" + current;
+        let title = prev.get('title');
+        let category = prev.get('category');
+
+        let search = "page=" + current;
+        if (category) search += "&category=" + category;
+        if (title) search += "&title=" + title;
+
+        return search;
     })
 
     return (
-        <div className="basis-2/3 flex flex-col items-center">
+        <div className="basis-2/3 flex flex-col items-center justify-center h-full">
             {isLoading ? <Loading /> :
-                <>
+                (data && data?.response.list.length == 0) ? <div>No Record</div> : <>
                     <div className='grid grid-cols-1 md:grid-cols-2 md:gap-8'>
                         {data?.response.list.map((item, index) => {
                             return (

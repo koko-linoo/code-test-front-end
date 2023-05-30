@@ -6,6 +6,7 @@ import collapseImage from "@assets/images/collapse.png";
 import "./header.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { SearchField } from "@components/commons/search";
 
 export default function PageHeader() {
 
@@ -48,9 +49,7 @@ export default function PageHeader() {
                     </NavLink>
                 </div>
                 <div className="hidden lg:flex w-1/3  space-x-2 justify-end">
-                    {!hidden ?
-                        <input placeholder="Search" className="text-sm rounded-md focus:w-60 px-3 py-1 border bg-transparent form-input" type="search" />
-                        : null
+                    {!hidden ? <SearchField /> : null
                     }
                     <button onClick={() => setHidden(prev => !prev)} className="transition ease-in-out delay-150 active:translate-y-1 rounded-full p-3 hover:bg-slate-100 hover:shadow-slate-200 hover:shadow-lg ">
                         <img className="w-4" src={searchImage} />
@@ -77,10 +76,7 @@ export default function PageHeader() {
                     </ul>
                 </div> : null}
                 {!hidden ? <div className="block lg:hidden">
-                    <input
-                        placeholder="Search"
-                        className="rounded-md border w-full p-2 form-input" type="search"
-                    />
+                    <SearchField />
                 </div> : null}
             </div>
         </header>

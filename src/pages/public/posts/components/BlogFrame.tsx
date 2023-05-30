@@ -2,6 +2,7 @@ import bgImage from '@assets/images/blog-header.png';
 import CategorySideBar from '../categories';
 import TagSideBar from '../tags';
 import RecentSideBar from '../recent';
+import { SearchField } from '@components/commons/search';
 
 interface BlogFrameProps {
     children: React.ReactNode;
@@ -25,10 +26,7 @@ export default function BlogFrame({ children }: BlogFrameProps) {
                     {children}
                 </div>
                 <div className='basis-1/3 flex flex-col space-y-5 border-solid mb-10'>
-                    <input
-                        className='border px-5 py-3 bg-slate-50 text-xs rounded w-full'
-                        placeholder='Search here'
-                    />
+                    <SearchField />
 
                     <CategorySideBar />
 
