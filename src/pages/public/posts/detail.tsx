@@ -3,9 +3,14 @@ import { useGetPost } from "@hooks/posts";
 import { useParams } from "react-router-dom"
 import BlogFrame from "./components/BlogFrame";
 import RelatedPosts from "./components/RelatedPosts";
+import { useEffect } from "react";
 
 export default function PostDetail() {
     const { id } = useParams();
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [id])
 
     const { isLoading, data } = useGetPost(parseInt(id!));
 
