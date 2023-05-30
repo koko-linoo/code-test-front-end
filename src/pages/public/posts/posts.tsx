@@ -9,14 +9,13 @@ export function PostsContent() {
     const [params, setSearchParam] = useSearchParams();
 
     let category = params.get('category') ? { name: params.get('category') } : undefined;
+    let title = params.get('title') ? { contains: params.get('title') } : undefined;
 
     const { isLoading, data } = useGetPosts({
         skip: 0,
         take: parseInt(params.get('page') ?? '1') * 6,
         filter: JSON.stringify({
-            title: params.get('title') ? {
-                contains: params.get('title'),
-            } : undefined,
+            title,
             category,
         }),
         orderBy: JSON.stringify({
@@ -38,7 +37,17 @@ export function PostsContent() {
 
     return (
         <div className="basis-2/3 flex flex-col items-center justify-center h-full">
-            {category ? <span className='my-5 md:my-0 md:mb-5 border w-full p-3 shadow bg-white'>Category - {category.name}</span> : null}
+            {category || title ? <span className='my-5 flex flex-col md:my-0 border md:mb-5 w-full p-3 '>
+                {category ? <>
+                    <span className='md:my-0 w-full p-3 '>
+                        Search Title - {category.name}
+                    </span>
+                    {title && <hr />}
+                </> : null}
+                {title ? <span className='md:my-0 w-full p-3 '>
+                    Search Title - {title.contains}
+                </span> : null}
+            </span> : null}
             {isLoading ? <div className='h-full py-5'><Loading /></div> :
                 (data && data?.response.list.length == 0) ? <div className='flex-1 py-36 w-full flex items-center justify-center'>No Record</div> : <>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8'>

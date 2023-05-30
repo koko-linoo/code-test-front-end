@@ -26,6 +26,7 @@ export function SearchField() {
 
     return (
         <input
+            defaultValue={_.get("title") ?? undefined}
             className='border px-5 py-3 bg-slate-50 text-xs rounded w-full'
             placeholder='Search here'
             onChange={(e) => setSearchPost(e.target.value)}
