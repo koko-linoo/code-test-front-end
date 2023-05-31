@@ -24,7 +24,7 @@ export default function BlogFrame({ children }: BlogFrameProps) {
                 {param.id ? "" : "Latest News"}
             </div>
             <section className='px-10 lg:px-24 xl:px-64 mb-5 flex flex-col flex-col-reverse lg:flex-row lg:space-x-10'>
-                <div className='basis-2/3'>
+                <div className='basis-2/3 flex w-full h-full flex-col'>
                     {children}
                 </div>
                 <div className='basis-1/3 flex flex-col space-y-5 border-solid mb-10'>
