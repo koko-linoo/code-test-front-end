@@ -1,12 +1,12 @@
 import api from "@api";
 
 export interface PostModel {
-    id: number;
+    id?: number;
     title: string;
-    user: {
+    user?: {
         username: string;
-    };
-    categoryId: number;
+    } | undefined;
+    categoryId?: number;
     content: string;
     benefit: string;
     imageUrl: string;
@@ -29,15 +29,19 @@ export async function fetchAllPosts(params?: any): Promise<PaginatedResult<PostM
     return result.data;
 }
 
-export async function fetchPost(id: number): Promise<PostModel> {
-    const result = await api.get(`${endpoint}/${id}`);
-    return result.data;
+export async function fetchPost(id: string | undefined) {
+    const result = await api.get(`${endpoint}/${id}`).catch(() => null)
+    return result?.data;
 }
 
-export function addPost(data: any): any {
-    return api.post(endpoint, data);
+export async function addPost(data: any): Promise<PostModel> {
+    return await api.post(endpoint, data);
 }
 
-export function updatePost(data: any): any {
-    return api.patch(`${endpoint}/${data.id}`, data);
+export async function updatePost({ id, ...data }: any): Promise<PostModel> {
+    return await api.patch(`${endpoint}/${id}`, data);
+}
+
+export async function deletePost(id: number): Promise<any> {
+    return api.delete(`${endpoint}/${id}`);
 }

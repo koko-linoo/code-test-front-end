@@ -19,7 +19,7 @@ export default function PostGridItem({ item }: PostGridItemProps) {
                 </div>
                 <div className="flex justify-between items-center space-x-2">
                     <div className="w-10 h-10 rounded-full bg-sky-200" />
-                    <div className="flex-1 text-sm">{item.user.username}</div>
+                    <div className="flex-1 text-sm">{item.user?.username}</div>
                     <div className="text-xs">
                         {date.toDateString()}
                     </div>

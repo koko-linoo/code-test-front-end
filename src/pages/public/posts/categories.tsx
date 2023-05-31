@@ -34,7 +34,7 @@ export default function CategorySideBar() {
             <div className='bg-white text-xs p-5 w-full space-y-1'>
                 {
                     isLoading ? <Loading />
-                        : data?.map((cat, index) => {
+                        : data?.response.list.map((cat, index) => {
                             return (
                                 <div
                                     onClick={() => onClick(cat.name)} key={`${cat.name} ${index}`}
@@ -44,7 +44,7 @@ export default function CategorySideBar() {
                                         {cat.name}
                                     </span>
                                     <span>
-                                        {cat.posts.length}
+                                        {cat.posts?.length}
                                     </span>
                                 </div>
                             )

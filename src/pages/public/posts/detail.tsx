@@ -12,7 +12,7 @@ export default function PostDetail() {
         window.scrollTo(0, 0)
     }, [id])
 
-    const { isLoading, data } = useGetPost(parseInt(id!));
+    const { isLoading, data } = useGetPost(id);
 
     return (
         <div>

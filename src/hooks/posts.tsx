@@ -21,7 +21,7 @@ export const useGetPosts = (params?: PaginatedQuery) => {
     });
 }
 
-export const useGetPost = (id: number) => {
+export const useGetPost = (id: string | undefined) => {
     return useQuery({
         queryKey: [postKeys, id],
         queryFn: () => fetchPost(id),

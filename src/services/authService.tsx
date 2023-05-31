@@ -2,14 +2,27 @@ import api from "@api";
 
 const endpoint = "/auth";
 
-export function login(formData: any) {
-    return api.post(`${endpoint}/login`, formData);
+export interface LoginResult {
+    accessToken: string;
+}
+
+export interface User {
+    username: string;
+    password: string;
+}
+
+export async function login(formData: any): Promise<LoginResult | null> {
+    return api.post(`${endpoint}/login`, formData).then(
+        response => response?.data
+    )
 }
 
 export function register(formData: any): any {
     return api.post(`${endpoint}/register`, formData);
 }
 
-export function profile(): any {
-    return api.get(`${endpoint}/profile`);
+export async function getProfile(): Promise<Partial<User> | null> {
+    return api.get(`${endpoint}/profile`).then(
+        response => response?.data
+    )
 }

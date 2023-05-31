@@ -11,7 +11,7 @@ export const useGetTags = () => {
     });
 }
 
-export const useGetTag = (id: number) => {
+export const useGetTag = (id: string | undefined) => {
     return useQuery({
         queryKey: [tagKeys, id],
         queryFn: () => fetchTag(id),

@@ -13,7 +13,7 @@ import PostGridItem from "@pages/public/posts/components/PostGridItem";
 export default function PostSection() {
     const [index, setIndex] = useState(0);
     const navigate = useNavigate();
-    const { isLoading, data = [] } = useGetCategorys();
+    const { isLoading, data } = useGetCategorys();
 
     return (
         <section className="px-10 lg:px-24 xl:px-64 py-10 relative">
@@ -24,9 +24,9 @@ export default function PostSection() {
                             <img className="w-2 h-2" src={leftImage} />
                         </button>
                     </div>
-                    {data.length !== 0 && <CategorizedPosts category={data[index]} />}
+                    {data && data?.response.list.length !== 0 && <CategorizedPosts category={data?.response.list[index]!} />}
                     <div className="absolute bottom-0 top-0 right-5 xl:right-44 flex items-center">
-                        <button onClick={() => setIndex(prev => prev !== data.length - 1 ? prev + 1 : prev)} className="p-3 bg-blue-200 rounded-lg">
+                        <button onClick={() => setIndex(prev => prev !== data!.response.list.length - 1 ? prev + 1 : prev)} className="p-3 bg-blue-200 rounded-lg">
                             <img className="w-2 h-2 rotate-180" src={leftImage} />
                         </button>
                     </div>

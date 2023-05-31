@@ -1,8 +1,8 @@
 import DataTable from '@components/commons/table';
-import CreateTag from './create';
-import TagDetail from './detail';
-import UpdateTag from './update';
-import { useDeleteTag, useFetchTags } from './hooks';
+import CreateCategory from './create';
+import CategoryDetail from './detail';
+import UpdateCategory from './update';
+import { useDeleteCategory, useFetchCategorys } from './hooks';
 import { TableColumnProps } from 'antd';
 
 const columns: TableColumnProps<any>[] = [
@@ -21,10 +21,10 @@ const columns: TableColumnProps<any>[] = [
   },
 ];
 
-export default function Tags() {
-  const mutation = useDeleteTag();
+export default function Categorys() {
+  const mutation = useDeleteCategory();
 
-  const { total, isLoading, list } = useFetchTags();
+  const { total, isLoading, list } = useFetchCategorys();
 
   return (
     <DataTable
@@ -37,4 +37,4 @@ export default function Tags() {
   );
 }
 
-export { CreateTag, TagDetail, UpdateTag };
+export { CreateCategory, CategoryDetail, UpdateCategory };
