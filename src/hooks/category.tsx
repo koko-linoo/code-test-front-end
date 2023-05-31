@@ -11,7 +11,7 @@ export const useGetCategorys = () => {
     });
 }
 
-export const useGetCategory = (id: number) => {
+export const useGetCategory = (id: string | undefined) => {
     return useQuery({
         queryKey: [categoryKeys, id],
         queryFn: () => fetchCategory(id),
